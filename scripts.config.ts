@@ -8,7 +8,7 @@ const config:DenonConfig = {
   scripts: {
     start: {
       desc: "run",
-      cmd: "deno run --unstable src/mod.ts",
+      cmd: "deno run --unstable mod.ts",
       allow: ["net", "read", "write", "env"],
       env: {...env(), KAKEAI_OBSERVATIONS: "H1, H2 H3"}
     },

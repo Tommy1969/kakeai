@@ -1,5 +1,5 @@
 import { startBot } from "https://deno.land/x/discordeno@11.2.0/mod.ts";
-import {commit} from './bot_dict.ts'
+import {commit} from './src/bot_dict.ts'
 
 const logger = {
   error:  (text:string) => console.log(text),

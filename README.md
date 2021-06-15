@@ -6,6 +6,7 @@
 2. .env ファイルに DISCORD_KEY を設定しておく必要があります。
 
 ```env
+#.env
 DISCORD_KEY=TOKEN of discord
 ```
 
