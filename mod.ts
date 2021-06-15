@@ -1,3 +1,4 @@
+import 'https://deno.land/x/worker_types@v1.0.1/cloudflare-worker-types.ts';
 import { startBot } from "https://deno.land/x/discordeno@11.2.0/mod.ts";
 import {commit} from './src/bot_dict.ts'
 
@@ -27,4 +28,11 @@ startBot({
       msg && message.reply(msg);
     },
   },
+});
+
+addEventListener("fetch", (event:FetchEvent) => {
+  const response = new Response("Hello World!", {
+    headers: { "content-type": "text/plain" },
+  });
+  event.respondWith(response);
 });
