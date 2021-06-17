@@ -1,6 +1,5 @@
-import 'https://deno.land/x/worker_types@v1.0.1/cloudflare-worker-types.ts';
 import { startBot } from "https://deno.land/x/discordeno@11.2.0/mod.ts";
-import {commit} from './src/bot_dict.ts'
+import {commit} from './bot_dict.ts'
 
 const logger = {
   error:  (text:string) => console.log(text),
@@ -12,7 +11,7 @@ const logger = {
 const OBSERVATIONS:readonly string[]
   = Deno.env.get('KAKEAI_OBSERVATIONS')?.split(/,\s/) ?? []
 
-startBot({
+export default startBot({
   token: Deno.env.get('DISCORD_KEY') ?? '',
   intents: ["Guilds", "GuildMessages"],
   eventHandlers: {
@@ -28,11 +27,4 @@ startBot({
       msg && message.reply(msg);
     },
   },
-});
-
-addEventListener("fetch", (event:FetchEvent) => {
-  const response = new Response("Hello World!", {
-    headers: { "content-type": "text/plain" },
-  });
-  event.respondWith(response);
 });
