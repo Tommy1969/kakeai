@@ -1,8 +1,16 @@
-import 'https://deno.land/x/worker_types@v1.0.1/service-worker-types.ts';
+import './src/mod.ts'
+
+// for Deno Deploy
+
+interface FetchEvent extends Event {
+  respondWith(r: Response | Promise<Response>): void;
+}
+
+const version = Deno.env.get('VERSION') ?? '0.0.0'
 
 const fetchHandler = {
   handleEvent: (event:FetchEvent) => {
-    const response = new Response("Kakeai is alive!", {
+    const response = new Response(`Kakeai ${version} is alive!`, {
       headers: { "content-type": "text/plain" },
     });
     event.respondWith(response);
