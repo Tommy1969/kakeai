@@ -1,5 +1,5 @@
 import { startBot } from "https://deno.land/x/discordeno@11.2.0/mod.ts";
-import {commit} from './bot_calc.ts'
+import {commit} from './bot_dict.ts'
 
 const logger = {
   error:  (text:string) => console.log(text),
@@ -28,20 +28,3 @@ startBot({
     },
   },
 });
-
-interface FetchEvent extends Event {
-  respondWith(r: Response | Promise<Response>): void;
-}
-
-const version = Deno.env.get('VERSION') ?? '0.0.0'
-
-const fetchHandler = {
-  handleEvent: (event:FetchEvent) => {
-    const response = new Response(`Kakeai ${version} is alive!`, {
-      headers: { "content-type": "text/plain" },
-    });
-    event.respondWith(response);
-  }
-}
-
-addEventListener("fetch", fetchHandler);
