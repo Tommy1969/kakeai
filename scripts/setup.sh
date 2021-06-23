@@ -1,2 +1,2 @@
 #!/usr/bin/sh
-cp ~/.kakeai/.env /opt/kakeai/
+cp /home/ec2-user/.kakeai/.env /opt/kakeai/
