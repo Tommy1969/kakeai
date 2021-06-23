@@ -1,5 +1,10 @@
-version: 0.0
+version: 0.1
 os: linux
 files:
   - source: /
     destination: /opt/kakeai
+hooks:
+  AfterInstall:
+    - location: scripts/setup.sh
+  ApplicationStart:
+    - location: scripts/start.sh
