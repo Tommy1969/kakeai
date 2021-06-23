@@ -1,5 +1,4 @@
-import {
-  assert} from "https://deno.land/std@0.65.0/testing/asserts.ts";
+import { assert } from "https://deno.land/std@0.65.0/testing/asserts.ts";
 
 import { commit } from "./bot_calc.ts";
 

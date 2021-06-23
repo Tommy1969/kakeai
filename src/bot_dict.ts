@@ -17,7 +17,7 @@ const schemaVoca = {
 class Vocabulary {
   readonly #regex: RegExp;
   readonly #replies: string[];
-  #match:RegExpExecArray|null = null;
+  #match: RegExpExecArray | null = null;
   constructor(word: string, replies: string[]) {
     this.#regex = new RegExp(word);
     this.#replies = replies;
@@ -46,18 +46,19 @@ class Vocabulary {
   }
 }
 
-
 type Voca = {
-  word:     string
-  replies:  string[]
-}
+  word: string;
+  replies: string[];
+};
 
 const VOCABULARY_FILE = "./resources/vocabulary.yaml";
-const rawVoca:Voca[] = await new YamlLoader().parseFile(VOCABULARY_FILE) as Voca[];
+const rawVoca: Voca[] = await new YamlLoader().parseFile(
+  VOCABULARY_FILE,
+) as Voca[];
 
 const vocabularies: Vocabulary[] = rawVoca
-  .map((it:Voca) => vs.applySchemaObject(schemaVoca, it))
-  .map((it:Voca) => new Vocabulary(it.word, it.replies));
+  .map((it: Voca) => vs.applySchemaObject(schemaVoca, it))
+  .map((it: Voca) => new Vocabulary(it.word, it.replies));
 
 export const commit = (content: string): string | null => {
   const result: (string | null)[] = vocabularies

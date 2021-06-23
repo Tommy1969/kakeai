@@ -1,13 +1,13 @@
 import { util } from "./util.ts";
 
 class ReplyBase {
-  #match:RegExpExecArray|null = null;
+  #match: RegExpExecArray | null = null;
   readonly #regex = /([一1]\s?[人個つ]|(どこ|誰|どれ|なに|何)).*選\S*[\s]+(?<option>.+)/;
   readonly #replies = [
-    (v:string[]) => `おめでとう〜!! **${v[0]}** が選ばれました!`,
-    (v:string[]) => `今回は **${v[0]}** が選ばれました!!`,
-    (v:string[]) => `よし! **${v[0]}** にしよう!!`,
-    (v:string[]) => `**${v[0]}** はいかがでしょう?`,
+    (v: string[]) => `おめでとう〜!! **${v[0]}** が選ばれました!`,
+    (v: string[]) => `今回は **${v[0]}** が選ばれました!!`,
+    (v: string[]) => `よし! **${v[0]}** にしよう!!`,
+    (v: string[]) => `**${v[0]}** はいかがでしょう?`,
   ];
 
   get replies() {
@@ -38,7 +38,8 @@ class ReplyBase {
    * @returns {string} message for reply
    */
   chooseOne(): string {
-    const box:string[] = this.#match?.groups?.option.split(/[\s,、\-:：]+/) ?? [];
+    const box: string[] = this.#match?.groups?.option.split(/[\s,、\-:：]+/) ??
+      [];
     return box[util.random(box.length)];
   }
 }

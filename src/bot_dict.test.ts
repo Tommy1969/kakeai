@@ -14,7 +14,7 @@ const fixtures: Fixture[] = [
   { text: "忘れた", expect: ["ほな、オレが一緒に考えてあげよ。"] },
 ];
 
-Deno.test('対応する返信が返ること', () => {
+Deno.test("対応する返信が返ること", () => {
   fixtures.forEach((it: Fixture) => {
     assertArrayContains(it.expect, [commit(it.text)], it.text);
   });
