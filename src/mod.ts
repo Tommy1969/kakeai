@@ -1,4 +1,4 @@
-import { startBot } from "https://deno.land/x/discordeno@11.2.0/mod.ts";
+import { startBot, DiscordenoMessage } from "https://deno.land/x/discordeno@12.0.0-rc.3/mod.ts";
 import { Logger } from "./logger.ts";
 import { commit } from "./bot_dict.ts";
 
@@ -17,7 +17,7 @@ startBot({
       Logger.info("Kakeai is online!");
       Logger.info(`start observating ${OBSERVATIONS}`);
     },
-    messageCreate(message) {
+    messageCreate(message:DiscordenoMessage) {
       if (message.isBot) return;
       Logger.debug(message);
       const msg = commit(message.content);
