@@ -18,11 +18,15 @@ startBot({
       Logger.info(`start observating ${OBSERVATIONS}`);
     },
     messageCreate(message:DiscordenoMessage) {
-      if (message.isBot) return;
-      Logger.debug(message);
-      const msg = commit(message.content);
-      Logger.info(`${message.content} - ${msg}`);
-      msg && message.reply(msg);
+      try {
+        if (message.isBot) return;
+        Logger.debug(message);
+        const msg = commit(message.content);
+        Logger.info(`${message.content} - ${msg}`);
+        msg && message.reply(msg);
+      } catch (err) {
+        Logger.error(err.message);
+      }
     },
   },
 });
