@@ -6,5 +6,7 @@ files:
 hooks:
   AfterInstall:
     - location: scripts/setup.sh
+      runas: ec2-user
   ApplicationStart:
     - location: scripts/start.sh
+      runas: ec2-user
