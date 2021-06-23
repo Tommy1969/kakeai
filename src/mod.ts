@@ -11,6 +11,10 @@ const logger = {
 const OBSERVATIONS:readonly string[]
   = Deno.env.get('KAKEAI_OBSERVATIONS')?.split(/,\s/) ?? []
 
+if(!Deno.env.get('DISCORD_KEY')) {
+  logger.error('Not found Discord key.')
+}
+
 startBot({
   token: Deno.env.get('DISCORD_KEY') ?? '',
   intents: ["Guilds", "GuildMessages"],
