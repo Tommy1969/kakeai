@@ -8,7 +8,10 @@ scripts:
       write: true
       env: true
   test:
-    cmd: deno test
+    cmd:
+      - vr lint
+      - vr format
+      - deno test
     allow:
       net: true
       read: true
@@ -19,6 +22,5 @@ scripts:
   pre-commit:
     cmd:
       - vr lint
-      - vr format
       - vr test
     gitHook: pre-commit
