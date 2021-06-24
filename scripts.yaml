@@ -1,0 +1,24 @@
+# for Velociraptor (Task runner)
+scripts:
+  start:
+    cmd: deno run --unstable mod.ts
+    allow:
+      net: true
+      read: true
+      write: true
+      env: true
+  test:
+    cmd: deno test
+    allow:
+      net: true
+      read: true
+      write: true
+      env: true
+  lint: deno lint
+  format: deno fmt
+  pre-commit:
+    cmd:
+      - vr lint
+      - vr format
+      - vr test
+    gitHook: pre-commit
