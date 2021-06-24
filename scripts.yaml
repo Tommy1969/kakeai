@@ -7,6 +7,8 @@ scripts:
       read: true
       write: true
       env: true
+    watch: true
+
   test:
     cmd:
       - vr lint
@@ -17,10 +19,14 @@ scripts:
       read: true
       write: true
       env: true
+    watch: true
+
   lint: deno lint
+
   format: deno fmt
+
   pre-commit:
     cmd:
       - vr lint
-      - vr test
+      - deno test --allow-read
     gitHook: pre-commit

@@ -1,5 +1,7 @@
 #!/usr/bin/sh
 
-cp ~/.kakeai/.env /opt/app/kakeai/
+FILE="/opt/app/kakeai/.env"
 
-exit 0
+if [ ! -e $FILE ]; then
+  cp ~/.kakeai/.env /opt/app/kakeai/
+fi
