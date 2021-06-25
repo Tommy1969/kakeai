@@ -7,6 +7,17 @@ scripts:
       read: true
       write: true
       env: true
+    log: info
+    watch: true
+
+  develop:
+    cmd: deno run --unstable mod.ts
+    allow:
+      net: true
+      read: true
+      write: true
+      env: true
+    log: debug
     watch: true
 
   test:

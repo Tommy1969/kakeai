@@ -62,8 +62,8 @@ const vocabularies: Vocabulary[] = rawVoca
 
 export const commit = (content: string): string | null => {
   const result: (string | null)[] = vocabularies
-    .map((it) => it.run(content))
-    .filter((it) => !!it);
+    .map((it: Vocabulary) => it.run(content))
+    .filter((it: string | null) => !!it);
 
   return result.shift() ?? null;
 };
