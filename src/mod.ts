@@ -4,7 +4,10 @@ import {
   startBot,
 } from "https://deno.land/x/discordeno@12.0.0-rc.3/mod.ts";
 import { Logger } from "./logger.ts";
-import { commit } from "./bot_dict.ts";
+import { commit as botDict } from "./bot_dict.ts";
+import { commit as botCalc } from "./bot_calc.ts";
+
+const BOTS = [botDict, botCalc];
 
 const OBSERVATIONS: readonly string[] =
   Deno.env.get("KAKEAI_OBSERVATIONS")?.split(/,\s/) ?? [];
@@ -26,9 +29,11 @@ startBot({
       try {
         if (message.isBot) return;
         Logger.debug(message);
-        const msg = commit(message.content);
-        Logger.info(`${message.content} - ${msg}`);
-        msg && message.reply(msg);
+        BOTS.forEach((bot) => {
+          const msg = bot(message.content);
+          Logger.info(`${message.content} - ${msg}`);
+          msg && message.reply(msg);
+        });
       } catch (err) {
         Logger.error(err.message);
       }
