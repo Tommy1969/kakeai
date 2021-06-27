@@ -45,10 +45,9 @@ class ReplyBase {
 }
 
 const vocabularies: ReplyBase[] = [new ReplyBase()];
-export const commit = (content: string): string | null => {
-  const result: (string | null)[] = vocabularies
+export const commit = (content: string): string => {
+  return vocabularies
     .map((it) => it.run(content))
-    .filter((it) => !!it);
-
-  return result.shift() ?? null;
+    .filter((it) => !!it)
+    .join("\n");
 };

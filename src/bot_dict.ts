@@ -60,10 +60,9 @@ const vocabularies: Vocabulary[] = rawVoca
   .map((it: Voca) => vs.applySchemaObject(schemaVoca, it))
   .map((it: Voca) => new Vocabulary(it.word, it.replies));
 
-export const commit = (content: string): string | null => {
-  const result: (string | null)[] = vocabularies
+export const commit = (content: string): string => {
+  return vocabularies
     .map((it: Vocabulary) => it.run(content))
-    .filter((it: string | null) => !!it);
-
-  return result.shift() ?? null;
+    .filter((it: string | null) => !!it)
+    .join("\n");
 };
