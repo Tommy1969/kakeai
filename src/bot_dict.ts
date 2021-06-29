@@ -1,3 +1,6 @@
+import {
+  DiscordenoMessage,
+} from "https://deno.land/x/discordeno@12.0.0-rc.3/mod.ts";
 import { YamlLoader } from "https://deno.land/x/yaml_loader@v0.1.0/mod.ts";
 import vs from "https://deno.land/x/value_schema@v3.0.0/mod.ts";
 import { util } from "./util.ts";
@@ -60,9 +63,11 @@ const vocabularies: Vocabulary[] = rawVoca
   .map((it: Voca) => vs.applySchemaObject(schemaVoca, it))
   .map((it: Voca) => new Vocabulary(it.word, it.replies));
 
-export const commit = (content: string): string => {
-  return vocabularies
-    .map((it: Vocabulary) => it.run(content))
+export const commit = (message: DiscordenoMessage): void => {
+  const test = vocabularies
+    .map((it: Vocabulary) => it.run(message.content))
     .filter((it: string | null) => !!it)
     .join("\n");
+
+  test && message.reply(test);
 };

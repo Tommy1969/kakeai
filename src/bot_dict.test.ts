@@ -1,4 +1,8 @@
-import { assertArrayContains } from "https://deno.land/std@0.65.0/testing/asserts.ts";
+import {
+  DiscordenoMessage,
+} from "https://deno.land/x/discordeno@12.0.0-rc.3/mod.ts";
+import { assertEquals } from "https://deno.land/std@0.65.0/testing/asserts.ts";
+import { Spy, spy } from "https://deno.land/x/mock@v0.10.0/spy.ts";
 
 import { commit } from "./bot_dict.ts";
 
@@ -15,7 +19,14 @@ const fixtures: Fixture[] = [
 ];
 
 Deno.test("対応する返信が返ること", () => {
+  const message: DiscordenoMessage = {} as DiscordenoMessage;
+
   fixtures.forEach((it: Fixture) => {
-    assertArrayContains(it.expect, [commit(it.text)], it.text);
+    const callback: Spy<void> = spy();
+    message.content = it.text;
+    message.reply = callback;
+
+    commit(message);
+    assertEquals(callback.calls[0].args, it.expect);
   });
 });

@@ -1,3 +1,7 @@
+import {
+  DiscordenoMessage,
+} from "https://deno.land/x/discordeno@12.0.0-rc.3/mod.ts";
+
 import { util } from "./util.ts";
 
 class ReplyBase {
@@ -45,9 +49,12 @@ class ReplyBase {
 }
 
 const vocabularies: ReplyBase[] = [new ReplyBase()];
-export const commit = (content: string): string => {
-  return vocabularies
-    .map((it) => it.run(content))
+
+export const commit = (message: DiscordenoMessage): void => {
+  const text: string = vocabularies
+    .map((it) => it.run(message.content))
     .filter((it) => !!it)
     .join("\n");
+
+  text && message.reply(text);
 };

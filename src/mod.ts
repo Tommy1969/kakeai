@@ -30,9 +30,8 @@ startBot({
         if (message.isBot) return;
         Logger.debug(message);
         BOTS.forEach((bot) => {
-          const msg = bot(message.content);
-          Logger.info(`${message.content} - ${msg}`);
-          msg && message.reply(msg);
+          Logger.info(`${message.content}`);
+          bot(message);
         });
       } catch (err) {
         Logger.error(err.message);
